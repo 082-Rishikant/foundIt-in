@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import Itemcontext from '../context APIs/items/Itemcontext';
 
 function ViewItem() {
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+
   const { itemId, userId } = useParams();
 
   const context = useContext(Itemcontext);
@@ -37,11 +40,11 @@ function ViewItem() {
           </ul>
 
           <div className="col-md-5 order-md-1">
-            <img src={`http://localhost:5000/user-img/${uploader.user_image}`}
+            <img src={`${host}/user-img/${uploader.user_image}`}
               alt="course"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "http://localhost:5000/user-img/default.png";
+                currentTarget.src = `${host}/user-img/default.png`;
               }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />
           </div>
 
@@ -64,11 +67,11 @@ function ViewItem() {
           </ul>
 
           <div className="col-md-5">
-            <img src={`http://localhost:5000/item-img/${item.image_name}`}
+            <img src={`${host}/item-img/${item.image_name}`}
               alt="course"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "http://localhost:5000/item-img/default.png";
+                currentTarget.src = `${host}/item-img/default.png`;
               }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />
           </div>
         </div>}

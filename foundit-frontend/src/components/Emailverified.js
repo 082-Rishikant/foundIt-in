@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 
 function Emailverified() {
-  const host = "http://localhost:5000";
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+  
   const [flag, setFlag] = useState(true);
   const [message, setMessage] = useState("Email verified successfully");
   const { id, token } = useParams();

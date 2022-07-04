@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Itemcontext from '../context APIs/items/Itemcontext';
-import './input.css';
 
 import TextField from '@mui/material/TextField';
 
@@ -11,7 +10,9 @@ function Login(props) {
   const {  getUser } = context;
 
 
-  const host = "http://localhost:5000";
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+  
   const [cred, setCred] = useState({ email: "", password: "" });
   const fontS={ style: { fontSize: 24 } };
 

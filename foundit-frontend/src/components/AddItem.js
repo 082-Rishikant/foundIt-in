@@ -7,7 +7,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import Itemcontext from '../context APIs/items/Itemcontext'
-import './input.css';
 
 function AddItem(props) {
   const context = useContext(Itemcontext);

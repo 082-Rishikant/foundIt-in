@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Items from './Items';
 import Itemcontext from '../context APIs/items/Itemcontext';
-import './input.css';
 
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';

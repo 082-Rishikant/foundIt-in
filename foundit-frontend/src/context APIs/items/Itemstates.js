@@ -2,7 +2,9 @@ import { useState } from "react";
 import Itemcontext from "./Itemcontext";
 
 function Itemstates(props) {
-  const host = "http://localhost:5000";
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+  
   const itemsinitially = [];
   const [items, setItems] = useState(itemsinitially);
   const [item, setItem] = useState(itemsinitially);

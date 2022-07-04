@@ -1,7 +1,6 @@
 import React, { useContext, useState, useRef } from 'react'
 import Itemcontext from '../context APIs/items/Itemcontext';
 import Item from './Item'
-import './input.css'
 
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,6 +9,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function Items(props) {
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+
   const context = useContext(Itemcontext);
   const { editItem, getUserById, uploader } = context;
 
@@ -209,11 +211,11 @@ function Items(props) {
                   </ul>
 
                   <div className="col-md-5 order-md-1">
-                    {flag && <img src={`http://localhost:5000/user-img/${uploader.user_image}`}
+                    {flag && <img src={`${host}/user-img/${uploader.user_image}`}
                       alt="course"
                       onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = "http://localhost:5000/user-img/default.png";
+                        currentTarget.src = `${host}/user-img/default.png`;
                       }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />}
                   </div>
 
@@ -235,11 +237,11 @@ function Items(props) {
                   </ul>
 
                   <div className="col-md-5">
-                    {flag && <img src={`http://localhost:5000/item-img/${viewItem.image_name}`}
+                    {flag && <img src={`${host}/item-img/${viewItem.image_name}`}
                       alt="course"
                       onError={({ currentTarget }) => {
                         currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = "http://localhost:5000/item-img/default.png";
+                        currentTarget.src = `${host}/item-img/default.png`;
                       }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />}
                   </div>
                 </div>

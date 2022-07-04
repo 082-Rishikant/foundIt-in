@@ -6,6 +6,10 @@ function Admin_User(props) {
   const { blockAUser} = context;
   const { _id, name, email, mobile_no, user_image, department, isBlocked, gender, role } = props.user;
   const [status, setStatus] = useState(isBlocked);
+
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+
   return (
     <>
 
@@ -19,11 +23,11 @@ function Admin_User(props) {
         <td>{isBlocked?"Blocked":"Active"}</td>
         <td>{role}</td>
         <td>
-          <img src={`http://localhost:5000/user-img/${user_image}`}
+          <img src={`${host}/user-img/${user_image}`}
             className="card-img-top rounded" alt="course"
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = "http://localhost:5000/item-img/default.png";
+              currentTarget.src = `${host}/user-img/default.png`;
             }} style={{ "width": 50, "height": 50 }} />
         </td>
         <td>

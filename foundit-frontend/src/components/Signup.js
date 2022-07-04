@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import './input.css';
 
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,7 +8,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function Signup(props) {
-  const host = "http://localhost:5000";
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+  
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "", mobile_no: "", department: ""});
   const [user_image, setUser_image] = useState();
   const [imglmtexc, setImglmtexc] = useState(false);

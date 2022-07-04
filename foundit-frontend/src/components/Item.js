@@ -7,6 +7,9 @@ function Item(props) {
   const { deleteItem, userData } = context;
   const { user_name, image_name, user, name, place, type, _id } = props.item
 
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+
   return (
     <>
       {/*<!-- Card Body starts here -->*/}
@@ -19,11 +22,11 @@ function Item(props) {
             </span>
 
             {/*<!-- Image -->*/}
-            <img src={`http://localhost:5000/item-img/${image_name}`}
+            <img src={`${host}/item-img/${image_name}`}
               className="card-img-top rounded mw-100" alt="course"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "http://localhost:5000/item-img/default.png";
+                currentTarget.src = `${host}/item-img/default.png`;
               }} style={{"minWidth":250, "height":250}} />
 
             {/*<!-- Card body -->*/}

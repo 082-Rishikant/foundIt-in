@@ -5,6 +5,10 @@ function Admin_item(props) {
   const context = useContext(Itemcontext);
   const { deleteItem } = context;
   const { _id, name, type, place, date, isreported, status, image_name , user_name} = props.item;
+
+  // const host="http://localhost:5000";
+  const host="https://foundit-in.herokuapp.com";
+
   return (
     <>
       <tr>
@@ -17,11 +21,11 @@ function Admin_item(props) {
         <td>{isreported ? "Yes" : "No"}</td>
         <td>{status}</td>
         <td>
-          {<img src={`http://localhost:5000/item-img/${image_name}`}
+          {<img src={`${host}/item-img/${image_name}`}
             className="card-img-top rounded" alt="course"
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = "http://localhost:5000/item-img/default.png";
+              currentTarget.src = `${host}/item-img/default.png`;
             }} style={{ "width": 50, "height": 50 }} />}
         </td>
         <td>
