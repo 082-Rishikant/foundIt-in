@@ -1,0 +1,32 @@
+.req:after {
+  content:" *";
+  color: red;
+}
+
+.fixedbutton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; 
+}
+
+.userImage{
+  width: 240px;
+  height: 240px;
+}
+
+.itemImage{
+  width: 80%;
+  height: 80%;
+}
+
+.myrounded{
+  /* border: 1px solid red; */
+  border-radius: 15px;
+  
+}
+.topround{
+  border-radius: 15px 15px 0px 0px;
+}
+.bottomround{
+  border-radius: 15px 15px 15px 15px;
+}
