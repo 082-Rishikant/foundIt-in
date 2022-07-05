@@ -119,15 +119,15 @@ export default function AdminHomepage(props) {
           <h2 className='text-center m-0 mt-2 my-3'>Filter Users</h2>
           <form onSubmit={handleSearch} method="GET">
             <div className="my-3 input-group-lg">
-              <TextField fullWidth id="fullWidth" label="Name" variant="standard" onChange={e=>setName(e.target.value)} name="name" InputProps={fontS}
+              <TextField fullWidth id="name" label="Name" variant="standard" onChange={e=>setName(e.target.value)} name="name" InputProps={fontS}
                 InputLabelProps={fontS} />
             </div>
 
             <div className="my-3 input-group-lg">
               <FormControl fullWidth variant='standard'>
-                <InputLabel id="demo-simple-select-helper-label" sx={{ fontSize: fontsize }}>Blocked User</InputLabel>
+                <InputLabel id="demo-simple-select-helper-label1" sx={{ fontSize: fontsize }}>Blocked User</InputLabel>
                 <Select
-                  labelId="demo-simple-select-helper-label"
+                  labelId="demo-simple-select-helper-label1"
                   id="demo-simple-select-helper"
                   value={blocked} sx={{ fontSize: fontsize }}
                   label="blocked user"
@@ -142,9 +142,9 @@ export default function AdminHomepage(props) {
 
             <div className="my-3 input-group-lg">
               <FormControl fullWidth variant='standard'>
-                <InputLabel id="demo-simple-select-helper-label" sx={{ fontSize: fontsize }}>Verified Users</InputLabel>
+                <InputLabel id="demo-simple-select-helper-label2" sx={{ fontSize: fontsize }}>Verified Users</InputLabel>
                 <Select
-                  labelId="demo-simple-select-helper-label"
+                  labelId="demo-simple-select-helper-label2"
                   id="demo-simple-select-helper"
                   value={vfied} sx={{ fontSize: fontsize }}
                   label="Verified Users"

@@ -125,7 +125,7 @@ function AdminHomepage(props) {
           <h2 className='text-center m-0 mt-2 my-3'>Filter items</h2>
           <form onSubmit={handleSearch} method="GET">
             <div className="my-3 input-group-lg">
-              <TextField fullWidth id="fullWidth" label="Name of Item" variant="standard" onChange={onChange} name="name" InputProps={fontS}
+              <TextField fullWidth id="name" label="Name of Item" variant="standard" onChange={onChange} name="name" InputProps={fontS}
                 InputLabelProps={fontS} />
             </div>
             <div className="my-3 input-group-lg">
@@ -147,15 +147,15 @@ function AdminHomepage(props) {
               </FormControl>
             </div>
             <div className="my-3 input-group-lg">
-              <TextField fullWidth id="fullWidth" label="Type of Item" variant="standard" onChange={onChange} name="type" InputProps={fontS}
+              <TextField fullWidth id="type" label="Type of Item" variant="standard" onChange={onChange} name="type" InputProps={fontS}
                 InputLabelProps={fontS} />
             </div>
             <div className="my-3 input-group-lg">
-              <TextField fullWidth id="fullWidth" label="Place where You lost or found the Item" variant="standard" onChange={onChange} name="place" InputProps={fontS}
+              <TextField fullWidth id="place" label="Place where You lost or found the Item" variant="standard" onChange={onChange} name="place" InputProps={fontS}
                 InputLabelProps={fontS} />
             </div>
             <div className="mt-3 input-group-lg">
-              <TextField focused type="date" fullWidth id="fullWidth" label="Date when You lost or found the Item" variant="standard" onChange={onChange} name="date" InputProps={fontS}
+              <TextField focused type="date" fullWidth id="date" label="Date when You lost or found the Item" variant="standard" onChange={onChange} name="date" InputProps={fontS}
                 InputLabelProps={fontS} />
             </div>
             <div className='d-grid mt-5'>

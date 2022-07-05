@@ -87,17 +87,17 @@ function AddItem(props) {
               {/* Form  */}
               <form onSubmit={handleAddItem} method="POST">
                 <div className="my-3">
-                  <TextField required fullWidth id="fullWidth" label="Name of Item" variant="standard" onChange={onChange} name="name" InputProps={fontS}
+                  <TextField required fullWidth id="name" label="Name of Item" variant="standard" onChange={onChange} name="name" InputProps={fontS}
                     InputLabelProps={fontS} inputProps={minl}/>
                 </div>
 
                 <div className="my-3">
-                  <TextField required fullWidth id="fullWidth" label="Type of Item" variant="standard" onChange={onChange} name="type" InputProps={fontS}
+                  <TextField required fullWidth id="type" label="Type of Item" variant="standard" onChange={onChange} name="type" InputProps={fontS}
                     InputLabelProps={fontS} inputProps={minl} />
                 </div>
 
                 <div className="my-3">
-                  <TextField required fullWidth id="fullWidth" label="Place where You lost or found" variant="standard" onChange={onChange} name="place" InputProps={fontS}
+                  <TextField required fullWidth id="place" label="Place where You lost or found" variant="standard" onChange={onChange} name="place" InputProps={fontS}
                     InputLabelProps={fontS} inputProps={minl} />
                 </div>
 
@@ -121,18 +121,18 @@ function AddItem(props) {
                 </div>
 
                 <div className="my-3">
-                  <TextField type="text-field" fullWidth id="fullWidth" label="description" variant="standard" onChange={onChange} name="description" InputProps={fontS}
+                  <TextField type="text-field" fullWidth id="description" label="description" variant="standard" onChange={onChange} name="description" InputProps={fontS}
                     InputLabelProps={fontS} />
                 </div>
 
                 <div className="my-3">
-                  <TextField focused type="date" required fullWidth id="outlined-required" label="Date when You lost or found" variant="standard" onChange={onChange} name="date" InputProps={fontS}
+                  <TextField focused type="date" required fullWidth id="date" label="Date when You lost or found" variant="standard" onChange={onChange} name="date" InputProps={fontS}
                     InputLabelProps={fontS} />
                 </div>
 
                 <div className="my-3">
                   {imglmtexc && <label htmlFor="image" className="form-label text-danger ms-2"> Image size exceeded!!</label>}
-                  <TextField type="file" focused required fullWidth id="fullWidth" label=" Image of item" variant="standard" onChange={(e) => {
+                  <TextField type="file" focused required fullWidth id="image" label=" Image of item" variant="standard" onChange={(e) => {
                     const file = e.target.files[0];
                     if (file && file.size > 2 * 1024 * 1024) setImglmtexc(true);
                     else setImglmtexc(false);

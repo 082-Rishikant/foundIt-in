@@ -10,7 +10,7 @@ function Login(props) {
   const {  getUser } = context;
   
   const [cred, setCred] = useState({ email: "", password: "" });
-  const fontS={ style: { fontSize: 24 } };
+  const fontS={ style: { fontSize: 21 } };
 
   const onChange = (e) => {
     setCred({ ...cred, [e.target.name]: e.target.value });
@@ -44,11 +44,11 @@ function Login(props) {
           <h2 className='text-center m-3 mb-5'>foundIt</h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4 input-group-lg">
-              <TextField fullWidth id="fullWidth" label="Email" variant="standard" onChange={onChange} name="email" InputProps={fontS}
+              <TextField fullWidth id="email" label="Email" variant="standard" onChange={onChange} name="email" InputProps={fontS}
                 InputLabelProps={fontS} required/>
             </div>
             <div className="mb-5 input-group-lg">
-              <TextField type="password" fullWidth id="fullWidth" label="Password" variant="standard" onChange={onChange} name="password" InputProps={fontS}
+              <TextField type="password" fullWidth id="password" label="Password" variant="standard" onChange={onChange} name="password" InputProps={fontS}
                 InputLabelProps={fontS} inputProps={{minLength:5}}/>
             </div>
             <div className='d-grid'>

@@ -114,8 +114,8 @@ router.post('/createuser',
       res.json({ success: true, auth_token });
 
     } catch (error) {
-      // first delete the saved image
       console.log(error.message);
+      // first delete the saved image
       deleteImage(req.file.path);
       return res.status(505).json({ success: false, message: error.message, from:"Catch Section | Create User" });
     }

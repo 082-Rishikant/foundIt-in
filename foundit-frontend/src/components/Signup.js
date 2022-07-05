@@ -71,27 +71,27 @@ function Signup(props) {
         <h2 className='text-center mb-4'>Register to foundIt</h2>
         <form onSubmit={handleSignup} method="POST">
           <div className="my-3 input-group-lg">
-            <TextField fullWidth id="fullWidth" label="Name" variant="standard" onChange={onChange} name="name" InputProps={fontS}
+            <TextField fullWidth id="name" label="Name" variant="standard" onChange={onChange} name="name" InputProps={fontS}
               InputLabelProps={fontS} inputProps={minl}/>
           </div>
           <div className="my-3 input-group-lg">
-            <TextField type="email" fullWidth id="fullWidth" label="Webmail address" variant="standard"  onChange={onChange} name="email" InputProps={fontS}
+            <TextField type="email" fullWidth id="email" label="Webmail address" variant="standard"  onChange={onChange} name="email" InputProps={fontS}
               InputLabelProps={fontS} inputProps={minl}/>
           </div>
           <div className="my-3 input-group-lg">
-            <TextField fullWidth id="fullWidth" label="Mobile Number" variant="standard" onChange={onChange} name="mobile_no" InputProps={fontS}
+            <TextField fullWidth id="mobile_no" label="Mobile Number" variant="standard" onChange={onChange} name="mobile_no" InputProps={fontS}
               InputLabelProps={fontS} inputProps={{minLength:10, maxLength:10}}/>
           </div>
           <div className="my-3 input-group-lg">
-            <TextField fullWidth id="fullWidth" label="Department" variant="standard" onChange={onChange} name="department" InputProps={fontS}
+            <TextField fullWidth id="department" label="Department" variant="standard" onChange={onChange} name="department" InputProps={fontS}
               InputLabelProps={fontS} inputProps={minl}/>
           </div>
           <div className="my-3 input-group-lg">
-            <TextField type="password" fullWidth id="fullWidth" label="Password" variant="standard" onChange={onChange} name="password" InputProps={fontS}
+            <TextField type="password" fullWidth id="password" label="Password" variant="standard" onChange={onChange} name="password" InputProps={fontS}
               InputLabelProps={fontS} inputProps={{minLength:5, maxLength:16}}/>
           </div>
           <div className="my-3 input-group-lg">
-            <TextField type="password" fullWidth id="fullWidth" label="Confirm Password" variant="standard" onChange={onChange} name="cpassword" InputProps={fontS} InputLabelProps={fontS} inputProps={{minLength:5, maxLength:16}}/>
+            <TextField type="password" fullWidth id="cpassword" label="Confirm Password" variant="standard" onChange={onChange} name="cpassword" InputProps={fontS} InputLabelProps={fontS} inputProps={{minLength:5, maxLength:16}}/>
           </div>
 
           <div className="my-3 input-group-lg">
@@ -116,7 +116,7 @@ function Signup(props) {
 
           <div className="mt-3 input-group-lg p-0">
             {/* {imglmtexc && <label htmlFor="user_image" className="form-label text-danger"> Image size exceeded!!</label>} */}
-            <TextField required focused label="Your image" type="file" fullWidth id="fullWidth" variant="standard" name="email" InputProps={fontS}
+            <TextField required focused label="Your image" type="file" fullWidth id="email" variant="standard" name="email" InputProps={fontS}
               InputLabelProps={fontS} onChange={event => {
                 const image = event.target.files[0];
                 if (image && image.size > 2 * 1024 * 1024) setImglmtexc(true);

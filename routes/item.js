@@ -114,7 +114,6 @@ router.delete('/deleteItem/:id', fetchuser, async (req, res) => {
     res.json({ success: true, message: "Item deleted successfully", item: item });
   } catch (error) {
     console.log(error.message);
-    console.error(error.message);
     res.status(402).send({ success: false, message: error.message, from: "deleteItem | catch" });
   }
 })

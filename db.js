@@ -2,7 +2,8 @@ const mongoose=require('mongoose');
 
 require('dotenv').config();
 
-const mongoURI = `mongodb://localhost:27017/${process.env.DB_NAME}?readPreference=primary&appname=MongoDB%20Compass&ssl=false`;
+// const mongoURI = `mongodb+srv://082_Rishikant:Hansraj1999@cluster0.c8wdi.mongodb.net/test`;
+const mongoURI = process.env.mongoURI;
 
 const connectToMongo=()=>{
   mongoose.connect(mongoURI, {

@@ -93,21 +93,16 @@ function Items(props) {
               {/* Form  */}
               <form onSubmit={handleUpdateItem} method="PUT">
 
-                {/* <div className="my-3 bg-dark">
-                  <h2>Update Item</h2>
-                  <button type="button" className="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> */}
-
                 <div className="my-3">
-                  <TextField required fullWidth id="fullWidth" label="Name of Item" variant="standard" onChange={onChange} name="ename" InputProps={fontS}
+                  <TextField required fullWidth id="ename" label="Name of Item" variant="standard" onChange={onChange} name="ename" InputProps={fontS}
                     InputLabelProps={fontS} inputProps={minl} value={newItem.ename} />
                 </div>
                 <div className="my-3">
-                  <TextField required fullWidth id="fullWidth" label="Type of Item" variant="standard" onChange={onChange} name="etype" InputProps={fontS}
+                  <TextField required fullWidth id="etype" label="Type of Item" variant="standard" onChange={onChange} name="etype" InputProps={fontS}
                     InputLabelProps={fontS} inputProps={minl} value={newItem.etype} />
                 </div>
                 <div className="my-3">
-                  <TextField required fullWidth id="fullWidth" label="Place where You lost or found the Item" variant="standard" onChange={onChange} name="eplace" InputProps={fontS}
+                  <TextField required fullWidth id="eplace" label="Place where You lost or found the Item" variant="standard" onChange={onChange} name="eplace" InputProps={fontS}
                     InputLabelProps={fontS} inputProps={minl} value={newItem.eplace} />
                 </div>
                 <div className="my-3">
@@ -129,16 +124,16 @@ function Items(props) {
                   </FormControl>
                 </div>
                 <div className="my-3">
-                  <TextField fullWidth id="fullWidth" label="description" variant="standard" onChange={onChange} name="edescription" InputProps={fontS}
+                  <TextField fullWidth id="edescription" label="description" variant="standard" onChange={onChange} name="edescription" InputProps={fontS}
                     InputLabelProps={fontS} inputProps={minl} value={newItem.edescription} />
                 </div>
                 <div className="my-3">
-                  <TextField type="date" required fullWidth id="fullWidth" label="Date when You lost or found the Item" variant="standard" onChange={onChange} name="edate" InputProps={fontS}
+                  <TextField type="date" required fullWidth id="edate" label="Date when You lost or found the Item" variant="standard" onChange={onChange} name="edate" InputProps={fontS}
                     InputLabelProps={fontS} value={newItem.edate.slice(0, 10)} />
                 </div>
                 <div className="my-3">
                   {imglmtexc && <label htmlFor="image" className="form-label text-danger ms-2"> Image size exceeded!!</label>}
-                  <TextField type="file" required focused fullWidth id="fullWidth" label="Image of Item" variant="standard" onChange={(e) => {
+                  <TextField type="file" required focused fullWidth id="image" label="Image of Item" variant="standard" onChange={(e) => {
                     const file = e.target.files[0];
                     if (file && file.size > 2 * 1024 * 1024) setImglmtexc(true);
                     else setImglmtexc(false);
@@ -161,7 +156,7 @@ function Items(props) {
       </div>
 
 
-      {/* 3. ***** Uploaded Items of User ***** */}
+      {/* 2. ***** Uploaded Items of User ***** */}
       <div className="container">
         <div className='row my-2'>
           {/* using Filter and map */}
