@@ -96,11 +96,12 @@ router.post('/createuser',
         }
       )
 
-      // **** Saving Token for email verification purpose ****
+      // // **** Saving Token for email verification purpose ****
       let token = await new Token({
         userId: user._id,
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
+
       // Token.createIndexes( { "expireAt": 1 }, { expireAfterSeconds: 360 } )
       const v_link = `https://foundit-in.herokuapp.com/verify/${user.id}/${token.token}`;
       sendEmail(v_link, req.body.email);
@@ -121,11 +122,11 @@ router.post('/createuser',
     }
   })
 // Router -1.2 For Email verification***********
-router.get("/verify/:id/:token", async (req, res) => {
+router.get('/verify/:id/:token', async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
-    if(user.verified) return res.send({ success: true, message: "Email verified sucessfully" });
     if (!user) return res.status(404).send({ success: false, message: "Your email not found in database" });
+    if(user.verified) return res.send({ success: true, message: "Your email is already verified" });
 
     const token = await Token.findOne({
       userId: user._id,
