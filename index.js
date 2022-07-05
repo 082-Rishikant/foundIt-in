@@ -21,9 +21,17 @@ app.use('/api/item', require('./routes/item'));
 app.use("/item-img", express.static(__dirname+'/public/item_images'));
 app.use("/user-img", express.static(__dirname+'/public/user_images'));
 
-// step-3 Heroku******
-if(process.env.NODE_ENV==="production"){
+// // step-3 Heroku******
+// if(process.env.NODE_ENV==="production"){
+//   app.use(express.static("foundit-frontend/build"));
+// }
+// step 3: Heroku 
+if ( process.env.NODE_ENV === "production"){
   app.use(express.static("foundit-frontend/build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'foundit-frontend', 'build', 'index.html'));
+  })
 }
 
 app.listen(port, ()=>{

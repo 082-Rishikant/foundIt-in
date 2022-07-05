@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "both": "concurrently \"npx nodemon index.js\" \"cd foundit-frontend && npm run start\" ",
-    "start":"node index.js",
+    "start": "node index.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix foundit-frontend && npm run build --prefix foundit-frontend"
   },
   "author": "Rishikant Patel",
@@ -26,6 +26,7 @@
     "mongoose": "^6.2.4",
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^5.0.2",
+    "path": "^0.12.7",
     "sib-api-v3-sdk": "^8.3.0"
   },
   "devDependencies": {
