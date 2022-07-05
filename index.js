@@ -22,7 +22,7 @@ app.use("/item-img", express.static(__dirname+'/public/item_images'));
 app.use("/user-img", express.static(__dirname+'/public/user_images'));
 
 // step-3 Heroku******
-if(process.env.NODE_ENV=="production"){
+if(process.env.NODE_ENV==="production"){
   app.use(express.static("foundit-frontend/build"));
 }
 
