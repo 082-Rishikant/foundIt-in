@@ -102,7 +102,7 @@ router.post('/createuser',
         token: crypto.randomBytes(32).toString("hex"),
       }).save();
       // Token.createIndexes( { "expireAt": 1 }, { expireAfterSeconds: 360 } )
-      const v_link = `http://localhost:3000/verify/${user.id}/${token.token}`;
+      const v_link = `https://foundit-in.herokuapp.com/verify/${user.id}/${token.token}`;
       sendEmail(v_link, req.body.email);
 
 
@@ -191,9 +191,14 @@ router.post('/loginUser', [
 
 // Route:3 - Get Loggedin User details using:POST  "/api/auth/getuser"  Login required
 router.post('/getuser', fetchuser, async (req, res) => {
-  const user_id = req.user_id;  // this is the user id that we set at the time of generating web token
-  const user_data = await User.findById(user_id).select("-password");//except password
-  res.send({ success: true, user_data: user_data });
+  try {
+    const user_id = req.user_id;  // this is the user id that we set at the time of generating web token
+    const user_data = await User.findById(user_id).select("-password");//except password
+    res.send({ success: true, user_data: user_data });
+  } catch (error) {
+    console.log(error.message);
+    res.status(509).json({ success: false, message: error.message, message2: "Catch Section" });
+  }
 })
 
 // Route:4 - Get User details By using Id:POST.  "/api/auth/getUserById/:id".  Login required

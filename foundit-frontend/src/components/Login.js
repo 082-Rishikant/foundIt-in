@@ -8,10 +8,6 @@ function Login(props) {
   let navigate = useNavigate();
   const context = useContext(Itemcontext);
   const {  getUser } = context;
-
-
-  // const host="http://localhost:5000";
-  const host="https://foundit-in.herokuapp.com";
   
   const [cred, setCred] = useState({ email: "", password: "" });
   const fontS={ style: { fontSize: 24 } };
@@ -23,7 +19,7 @@ function Login(props) {
   const handleLogin = (e) => {
     e.preventDefault();
     // API Fetch Call for logging in also send required data*********
-    fetch(`${host}/api/auth/loginUser`, {
+    fetch(`/api/auth/loginUser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

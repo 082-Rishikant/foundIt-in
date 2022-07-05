@@ -2,8 +2,6 @@ import { useState } from "react";
 import Itemcontext from "./Itemcontext";
 
 function Itemstates(props) {
-  // const host="http://localhost:5000";
-  const host="https://foundit-in.herokuapp.com";
   
   const itemsinitially = [];
   const [items, setItems] = useState(itemsinitially);
@@ -18,7 +16,7 @@ function Itemstates(props) {
   // 1. ******** Fetch all items using fetch API *********
   const fetchAllItems = async () => {
     // Method-1   ****API call****
-    const response = await fetch(`${host}/api/item/fetchitems`, {
+    const response = await fetch(`/api/item/fetchitems`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +31,7 @@ function Itemstates(props) {
   // 2. ******** Add A Item ********
   const addItem = async (data) => {
     setisAdded(false);
-    const response = await fetch(`${host}/api/item/uploaditem`, {
+    const response = await fetch(`/api/item/uploaditem`, {
       method: 'POST',
       headers: {
         'auth_token': localStorage.getItem('auth_token')
@@ -54,7 +52,7 @@ function Itemstates(props) {
 
   // 3. ******** Delete A Item ********
   const deleteItem = async (id) => {
-    const response = await fetch(`${host}/api/item/deleteItem/${id}`, {
+    const response = await fetch(`/api/item/deleteItem/${id}`, {
       method: 'DELETE',
       headers: {
         'auth_token': localStorage.getItem('auth_token'),
@@ -75,7 +73,7 @@ function Itemstates(props) {
 
   // 4. ******** Edit a Item ********
   const editItem = async (data, id) => {
-    const response = await fetch(`${host}/api/item/updateItem/${id}`, {
+    const response = await fetch(`/api/item/updateItem/${id}`, {
       method: 'PUT',
       headers: {
         'auth_token': localStorage.getItem('auth_token')
@@ -118,7 +116,7 @@ function Itemstates(props) {
   // 6. ******** Fetch a item using fetch API *********
   const getAItem = async (id) => {
     // Method-1   ****API call****
-    const response = await fetch(`${host}/api/item/getAItem/${id}`, {
+    const response = await fetch(`/api/item/getAItem/${id}`, {
       method: 'GET',
       headers: {
         'auth_token': localStorage.getItem('auth_token')
@@ -131,7 +129,7 @@ function Itemstates(props) {
 
   // 6. ****** Get All items || ADMIN Access ONLY ********
   const getAllItems=async()=>{
-    const response=await fetch(`${host}/api/item/getAllItems`, {
+    const response=await fetch(`/api/item/getAllItems`, {
       method:'GET',
       headers:{
         'auth_token':localStorage.getItem('auth_token')
@@ -145,7 +143,7 @@ function Itemstates(props) {
   // 1. ******** Get Loggedin User details ********
   const getUser = async () => {
     // API Call
-    const response = await fetch(`${host}/api/auth/getuser`, {
+    const response = await fetch(`/api/auth/getuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -159,7 +157,7 @@ function Itemstates(props) {
 
   // 2. ******** Get User details with Id ********(Login Required)
   const getUserById=async (id)=>{
-    const response=await fetch(`${host}/api/auth/getUserById/${id}`, {
+    const response=await fetch(`/api/auth/getUserById/${id}`, {
       method:'POST',
       headers:{
         'Content-Type':'application/json',
@@ -173,7 +171,7 @@ function Itemstates(props) {
 
   //3. ****** Get All user || ADMIN Access ONLY ********
   const getAllUsers=async()=>{
-    const response=await fetch(`${host}/api/auth/getAllUsers`, {
+    const response=await fetch(`/api/auth/getAllUsers`, {
       method:'GET',
       headers:{
         'Content-Type':'application/json',
@@ -187,7 +185,7 @@ function Itemstates(props) {
   
   //4. ****** Block a user || ADMIN Access ONLY ********
   const blockAUser=async(id)=>{
-    const response=await fetch(`${host}/api/auth/blockAUser/${id}`, {
+    const response=await fetch(`/api/auth/blockAUser/${id}`, {
       method:'POST',
       headers:{
         'Content-Type':'application/json',

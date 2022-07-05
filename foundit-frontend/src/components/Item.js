@@ -7,9 +7,6 @@ function Item(props) {
   const { deleteItem, userData } = context;
   const { user_name, image_name, user, name, place, type, _id } = props.item
 
-  // const host="http://localhost:5000";
-  const host="https://foundit-in.herokuapp.com";
-
   return (
     <>
       {/*<!-- Card Body starts here -->*/}
@@ -22,11 +19,11 @@ function Item(props) {
             </span>
 
             {/*<!-- Image -->*/}
-            <img src={`${host}/item-img/${image_name}`}
+            <img src={`/item-img/${image_name}`}
               className="card-img-top rounded mw-100" alt="course"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = `${host}/item-img/default.png`;
+                currentTarget.src = `/item-img/default.png`;
               }} style={{"minWidth":250, "height":250}} />
 
             {/*<!-- Card body -->*/}
@@ -41,14 +38,7 @@ function Item(props) {
 
               <small className='text-muted'>
                 Found at {place ? place : "Campus"} By <strong>{user_name ? user_name : "Unkown"}</strong> on . . . .<Link  className="btn btn-link stretched-link text-muted ps-1 pt-0" to={`/ViewItem/${_id}/${user}`}>Read More</Link>
-                {/* <Link className="text-muted stretched-link" to="/itemview">Read More</Link> */}
-                {/* {date ? new Date(date).toGMTString().slice(0, 16) : "..."} */}
               </small>
-
-              {/* <small className='text-muted'>
-                Found at {place ? place : "Campus"} By <strong>{user_name ? user_name : "Unkown"}</strong> on . . . .<button type="button" className="btn btn-link stretched-link text-muted ps-1 pt-0" onClick={()=>{props.handleViewItem(props.item)}}>Read More</button>
-              </small> */}
-
             </div>
           </div>
 

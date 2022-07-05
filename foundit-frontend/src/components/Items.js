@@ -9,11 +9,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function Items(props) {
-  // const host="http://localhost:5000";
-  const host="https://foundit-in.herokuapp.com";
 
   const context = useContext(Itemcontext);
-  const { editItem, getUserById, uploader } = context;
+  const { editItem } = context;
 
   const [image, setImage] = useState();
   const [newItem, setnewItem] = useState({ id: "", ename: "", edescription: "", etype: "", eplace: "", edate: "" });
@@ -69,23 +67,6 @@ function Items(props) {
     })
   }
 
-  const [viewItem, setViewItem] = useState([]);
-  const [flag, setFlag] = useState(false)
-  const refViewItemShow = useRef(null);
-
-  const handleViewItem = (item) => {
-    setViewItem(item);
-    let f = getUserById(item.user);
-    f.then((d) => {
-      if (d) {
-        setFlag(true);
-        refViewItemShow.current.click();
-      } else {
-        alert("Can not fetch the Item!!!!")
-      }
-    })
-  }
-
 
 
   return (
@@ -99,16 +80,16 @@ function Items(props) {
       // <!-- Modal --> */}
       <div className="modal" id="exampleModal3" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg " >
-          <div className="modal-content myrounded">
+          <div className="modal-content" style={{borderRadius: "15px"}}>
 
             {/* modal header */}
-            <div className="modal-header bg-dark topround">
+            <div className="modal-header bg-dark" style={{borderRadius: "15px 15px 0px 0px"}}>
               <h5 className="modal-title text-white" id="exampleModalLabel">Update item</h5>
               <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             {/* modal Body */}
-            <div className="modal-body mx-auto shadow bg-light px-5 py-3 col-12 justify-items-center myrounded">
+            <div className="modal-body mx-auto shadow bg-light px-5 py-3 col-12 justify-items-center" style={{borderRadius: "15px"}}>
               {/* Form  */}
               <form onSubmit={handleUpdateItem} method="PUT">
 
@@ -180,95 +161,17 @@ function Items(props) {
       </div>
 
 
-      {/* 2. ***** View Item ***** */}
-      {/* Modal Trigger Button */}
-      <button ref={refViewItemShow} type="button" data-bs-toggle="modal" data-bs-target="#itemViewModal" className="btn btn-link d-none">Read More</button>
-
-      {/* 
-      // <!-- Modal --> */}
-      <div className="modal fade " id="itemViewModal" tabIndex="-1" aria-labelledby="exampleModalLabel" data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true">
-        <div className="modal-dialog modal-fullscreen">
-          <div className="modal-content">
-
-            <div className="modal-header bg-light">
-              <button type="button" className="position-absolute left-0 border-0 btn-light btn-lg p-0" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFlag(false) }}>
-                <i className="bi bi-arrow-left"></i>
-              </button>
-              {/* <h5 className="modal-title text-center" id="exampleModalLabel">Modal title</h5> */}
-            </div>
-
-            <div className="modal-body p-0">
-              <div className="container marketing">
-                {/* <!-- START THE FEATURETTES --> */}
-                <div className="row featurette mt-3">
-
-                  <ul className="col-md-7 order-md-2 list-unstyled">
-                    <li><h2 className="featurette-heading fw-normal lh-1"><span className="text-muted">Uploader Details</span></h2></li>
-                    <li><p className="lead"><strong className='text-muted'>Name:</strong> {uploader.name}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Modile No:</strong> {uploader.mobile_no}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Department:</strong> {uploader.department}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Gender:</strong> {uploader.gender}</p></li>
-                  </ul>
-
-                  <div className="col-md-5 order-md-1">
-                    {flag && <img src={`${host}/user-img/${uploader.user_image}`}
-                      alt="course"
-                      onError={({ currentTarget }) => {
-                        currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = `${host}/user-img/default.png`;
-                      }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />}
-                  </div>
-
-                </div>
-
-                <hr className="featurette-divider" />
-
-                <div className="row featurette mb-2">
-
-                  <ul className="col-md-7 list-unstyled">
-                    <li><h2 className="featurette-heading fw-normal lh-1"><span className="text-muted">Item Details.</span></h2></li>
-                    <li><p className="lead"><strong className='text-muted'>Name:</strong> {viewItem.name}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Type:</strong> {viewItem.type}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Status:</strong> {viewItem.status}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Is Reported:</strong> {viewItem.is_reported ? "Yes" : "No"}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Place Where it Found/Lost:</strong> {viewItem.place}</p></li>
-                    <li><p className="lead"><strong className='text-muted'>Date:</strong> {flag && viewItem.date.slice(0, 10)}</p></li>
-                    {/* <li><p className="lead"><small className="text-muted">Last updated 3 mins ago</small></p></li> */}
-                  </ul>
-
-                  <div className="col-md-5">
-                    {flag && <img src={`${host}/item-img/${viewItem.image_name}`}
-                      alt="course"
-                      onError={({ currentTarget }) => {
-                        currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = `${host}/item-img/default.png`;
-                      }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />}
-                  </div>
-                </div>
-
-              </div>
-
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
       {/* 3. ***** Uploaded Items of User ***** */}
       <div className="container">
         <div className='row my-2'>
           {/* using Filter and map */}
 
           {props.fis !== "All" && props.items.filter(item => item.status === props.fis).map((filteredItem, id) => {
-            return <Item handleViewItem={handleViewItem} key={id} flag={props.flag} item={filteredItem} updateItem={updateItem} showAlert={props.showAlert} />
+            return <Item key={id} flag={props.flag} item={filteredItem} updateItem={updateItem} showAlert={props.showAlert} />
           })}
 
           {props.fis === "All" && props.items.map((item, id) => {
-            return <Item handleViewItem={handleViewItem} key={id} flag={props.flag} item={item} updateItem={updateItem} showAlert={props.showAlert} />
+            return <Item key={id} flag={props.flag} item={item} updateItem={updateItem} showAlert={props.showAlert} />
           })}
         </div>
       </div>

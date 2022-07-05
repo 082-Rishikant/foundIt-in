@@ -8,9 +8,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function Signup(props) {
-  // const host="http://localhost:5000";
-  const host="https://foundit-in.herokuapp.com";
-  
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "", mobile_no: "", department: ""});
   const [user_image, setUser_image] = useState();
   const [imglmtexc, setImglmtexc] = useState(false);
@@ -53,7 +50,7 @@ function Signup(props) {
       props.showAlert("Enter your webmail of NITT", "danger");  return;  
     }
 
-    const response = await fetch(`${host}/api/auth/createuser`, {
+    const response = await fetch(`/api/auth/createuser`, {
       method: 'POST',
       body: data
     });

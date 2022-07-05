@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 
 function Emailverified() {
-  // const host="http://localhost:5000";
-  const host="https://foundit-in.herokuapp.com";
   
   const [flag, setFlag] = useState(true);
   const [message, setMessage] = useState("Email verified successfully");
@@ -11,7 +9,7 @@ function Emailverified() {
   const navigate=useNavigate();
 
   const isVerified = async () => {
-    const response = await fetch(`${host}/api/auth/verify/${id}/${token}`, {
+    const response = await fetch(`/api/auth/verify/${id}/${token}`, {
       method: 'GET'
     });
     const json = await response.json();

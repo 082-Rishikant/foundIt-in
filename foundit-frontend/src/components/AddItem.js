@@ -62,10 +62,10 @@ function AddItem(props) {
       {/* <!-- Button trigger modal --> */}
       {
         localStorage.getItem('auth_token') ?
-          <button type="button" className="btn btn-primary btn-lg rounded-pill fixedbutton m-0 p-0 p-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" className="btn btn-primary btn-lg rounded-pill m-0 p-0 p-1" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{position: "fixed",bottom: "20px",right: "20px"}}>
             <i className="bi bi-plus-lg me-1"></i>Add Item
           </button> :
-          <button type="button" className="btn btn-primary btn-lg rounded-pill fixedbutton m-0 p-0 p-1" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          <button type="button" className="btn btn-primary btn-lg rounded-pill m-0 p-0 p-1" data-bs-toggle="modal" data-bs-target="#exampleModal2" style={{position: "fixed",bottom: "20px",right: "20px"}}>
             <i className="bi bi-plus-lg me-1"></i>Add Item
           </button>
       }
@@ -74,16 +74,16 @@ function AddItem(props) {
       {/* <!-- Modal - 1 --> */}
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg">
-          <div className="modal-content myrounded">
+          <div className="modal-content" style={{borderRadius: "15px"}}>
 
             {/* modal header */}
-            <div className="modal-header bg-dark topround">
+            <div className="modal-header bg-dark" style={{borderRadius: "15px 15px 0px 0px"}}>
               <h5 className="modal-title text-white" id="exampleModalLabel">Add item</h5>
               <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             {/* modal Body */}
-            <div className="modal-body mx-auto bg-white py-3 px-5 col-12 justify-items-center myrounded">
+            <div className="modal-body mx-auto bg-white py-3 px-5 col-12 justify-items-center" style={{borderRadius: "15px"}}>
               {/* Form  */}
               <form onSubmit={handleAddItem} method="POST">
                 <div className="my-3">

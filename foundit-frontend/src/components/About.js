@@ -20,26 +20,26 @@ export default function About() {
               {/* <div className="d-none d-lg-block position-absolute bg-no-repeat bg-position-center h-100" style={{ top: "0", left: "-45px", width: "646px", backgroundImage: "url(img/pages/about/bg-shape.svg)" }}></div> */}
               <div className="row g-0 mx-n2 pt-lg-4">
                 <div className="col-sm-4 px-2 mb-3">
-                  <div className="card h-100 card-body py-5 justify-content-center border-0 shadow-lg text-center myrounded text-primary" to="/">
+                  <div className="card h-100 card-body py-5 justify-content-center border-0 shadow-lg text-center text-primary" to="/" style={{borderRadius: "15px"}}>
                     <h3 className="h5 mb-0 fs-4">Found or Lost</h3>
                   </div>
                 </div>
 
                 <div className="col-sm-4 px-2 mb-3">
-                  <div className="card card-body py-5 border-0 shadow-lg text-center mb-3 myrounded text-primary" to="/">
+                  <div className="card card-body py-5 border-0 shadow-lg text-center mb-3 text-primary" to="/" style={{borderRadius: "15px"}}>
                     <i className="ai-pie-chart text-danger h1 mb-3"></i>
                     <h3 className="h5 mb-0 fs-4">take</h3>
                   </div>
-                  <div className="card card-body py-5 border-0 shadow-lg text-center myrounded text-primary" to="/"><i className="ai-refresh-ccw text-info h1 mb-3"></i>
+                  <div className="card card-body py-5 border-0 shadow-lg text-center text-primary" to="/" style={{borderRadius: "15px"}}><i className="ai-refresh-ccw text-info h1 mb-3"></i>
                     <h3 className="h5 mb-0 fs-4">picture</h3>
                   </div>
                 </div>
 
                 <div className="col-sm-4 px-2 mb-3">
-                  <div className="card card-body py-5 border-0 shadow-lg text-center mb-3 myrounded text-primary" to="/"><i className="ai-folder-plus text-success h1 mb-3"></i>
+                  <div className="card card-body py-5 border-0 shadow-lg text-center mb-3 text-primary" to="/" style={{borderRadius: "15px"}}><i className="ai-folder-plus text-success h1 mb-3"></i>
                     <h3 className="h5 mb-0 fs-4">a</h3>
                   </div>
-                  <div className="card card-body py-5 border-0 shadow-lg text-center myrounded text-primary" to="/"><i className="ai-share text-warning h1 mb-3"></i>
+                  <div className="card card-body py-5 border-0 shadow-lg text-center text-primary" to="/" style={{borderRadius: "15px"}}><i className="ai-share text-warning h1 mb-3"></i>
                     <h3 className="h5 mb-0 fs-4">Upload it</h3>
                   </div>
                 </div>
