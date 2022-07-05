@@ -115,6 +115,7 @@ router.post('/createuser',
 
     } catch (error) {
       // first delete the saved image
+      console.log(error.message);
       deleteImage(req.file.path);
       return res.status(505).json({ success: false, message: error.message, from:"Catch Section | Create User" });
     }
@@ -137,6 +138,7 @@ router.get("/verify/:id/:token", async (req, res) => {
 
     res.send({ success: true, message: "Email verified sucessfully" });
   } catch (error) {
+    console.log(error.message);
     res.status(404).send({ success: false, message: error.message, from: "Verify Email | Catch Section" });
   }
 });
@@ -184,6 +186,7 @@ router.post('/loginUser', [
     res.json({ success: true, auth_token });
 
   } catch (error) {
+    console.log(error.message);
     res.status(509).json({ success: false, message: error.message });
   }
 
@@ -207,6 +210,7 @@ router.post('/getUserById/:id', fetchuser, async (req, res) => {
     const uploader = await User.findById(req.params.id).select("-password");//except password
     res.send({ success: true, uploader });
   } catch (error) {
+    console.log(error.message);
     res.status(509).json({ success: false, message: error.message, message2: "Catch Section" });
   }
 })
@@ -219,6 +223,7 @@ router.get('/getAllUsers', fetchuser, Isadmin, async (req, res) => {
     const users = await User.find().select("-password");
     res.send({ success: true, users: users });
   } catch (error) {
+    console.log(error.message);
     res.status(509).json({ success: false, message: error.message, message2: "Can not fetch all users!!!" });
   }
 });
@@ -233,6 +238,7 @@ router.post('/blockAUser/:id', fetchuser, Isadmin, async (req, res) => {
     const updatedStatus = await User.findById(req.params.id).select("isBlocked");
     res.json({ success: true, result: user, newStatus: updatedStatus });
   } catch (error) {
+    console.log(error.message);
     res.status(509).json({ success: false, message: error.message, message2: "Can not Block user!!!" });
   }
 });

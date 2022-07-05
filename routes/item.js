@@ -71,6 +71,7 @@ router.post('/uploaditem',
 
       res.send({ success: true, savedItem });
     } catch (error) {
+      console.log(error.message);
       deleteImage(req.file.path);
       return res.status(503).send({ success: false, from: "Catch section", message: error.message });
     }
@@ -87,6 +88,7 @@ router.get('/fetchitems',
       let items_list = await Item.find({ user: user_id });
       res.json({success:true, items_list});
     } catch (error) {
+      console.log(error.message);
       res.status(500).send({success:false,  message: error.message });
     }
   });
@@ -111,6 +113,7 @@ router.delete('/deleteItem/:id', fetchuser, async (req, res) => {
     item = await Item.findByIdAndDelete(req.params.id);
     res.json({ success: true, message: "Item deleted successfully", item: item });
   } catch (error) {
+    console.log(error.message);
     console.error(error.message);
     res.status(402).send({ success: false, message: error.message, from: "deleteItem | catch" });
   }
@@ -171,6 +174,7 @@ router.put('/updateItem/:id',
       item = await Item.findByIdAndUpdate(req.params.id, { $set: newItem }, { new: true })
       res.json({success:true, item});
     } catch (error) {
+      console.log(error.message);
       if(req.file) deleteImage(req.file.path);
       res.status(500).send({success:false, message:error.message, from:"Catch section"});
     }
@@ -182,6 +186,7 @@ router.get('/getAllItems', fetchuser, async (req, res)=>{
     const allitems=await Item.find();
     res.send({success:true, allitems:allitems});
   }catch (error) {
+    console.log(error.message);
     res.status(402).send({ success: false, message: error.message, from: "getAllItems" });
   }
 })
@@ -192,6 +197,7 @@ router.get('/getAItem/:id', fetchuser, async (req, res)=>{
     const item=await Item.findById(req.params.id);
     res.send({success:true, item:item});
   }catch (error) {
+    console.log(error.message);
     res.status(402).send({ success: false, message: error.message, from: "getAItem" });
   }
 })
