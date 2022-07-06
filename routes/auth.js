@@ -77,7 +77,7 @@ router.post('/createuser',
             userId: user._id,
             token: crypto.randomBytes(32).toString("hex"),
           }).save();
-          const v_link = `http://localhost:3000/verify/${user.id}/${token.token}`;
+          const v_link = `https://foundit-in.herokuapp.com/verify/${user.id}/${token.token}`;
           sendEmail(v_link, req.body.email);
 
           // Now using user id create a JWT token for security and authenticity
