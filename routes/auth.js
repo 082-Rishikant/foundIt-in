@@ -6,37 +6,22 @@ const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const fetchuser = require('../middlewares/fetchuser');
-const multer = require("multer");
 const { roles } = require('../roles');
 const sendEmail = require('../verification/Email');
 const Token = require('../models/Token');
-const jwt = require('jsonwebtoken'); 
-const deleteImage = require("../middlewares/deleteImage");
-// require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const JWT_secret = process.env.JWT_SECRET_KEY;
 
-// ***multer function for middleware***
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public/user_Images");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, uniqueSuffix + file.originalname)
-  }
-})
-
-// ***multer middleware***
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 2
-  }
+// cloudinary***********
+const cloudinary = require('cloudinary').v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.API_SECRET_KEY
 });
 
 // Router 1.1) - create a user using POST:'/api/auth/createuser' No login required
 router.post('/createuser',
-  upload.single('user_image'),
   [
     body('name').isLength({ min: 2 }),
     body('email').isEmail().contains("@nitt.edu"),
@@ -45,31 +30,20 @@ router.post('/createuser',
     body('department').isLength({ min: 2 }),
     body('gender').isLength({ min: 4 }),
   ], async (req, res) => {
-    // Try block starts from here
     try {
-      //check for validaion errors
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        deleteImage(req.file.path);
         return res.status(501).json({ success: false, message: "Enter the valid credentials", error: errors.array() });
-      }
-
-      // image name
-      let image_name = "defaultImage";
-      if (req.file) {
-        image_name = req.file.filename;
       }
 
       // check whether user with same email id exist
       let user = await User.findOne({ $or: [{ email: req.body.email }, { mobile_no: req.body.mobile_no }] });
       if (user) {
-        if(user.verified){
-          deleteImage(req.file.path);
+        if (user.verified) {
           return res.status(503).json({ success: false, message: "The user with this email or mobile number already exist" });
-        }else{
-          let path=`./public/user_Images/${user.user_image}`;
-          deleteImage(path);
-          let r=await User.deleteOne( {"_id": user.id});
+        } else {
+          let r = await User.deleteOne({ "_id": user.id });
+          await cloudinary.uploader.destroy(user.public_id);
         }
       }
 
@@ -78,55 +52,57 @@ router.post('/createuser',
       const securePassword = bcrypt.hashSync(req.body.password, salt);
 
       let role = roles.CLIENT;
-      if (req.body.email === process.env.ADMIN_EMAIL) {
-        role = roles.ADMIN;
-      }
+      if (req.body.email === process.env.ADMIN_EMAIL) role = roles.ADMIN;
 
-      // Now Create a new User in mongoDB
-      user = await User.create(
-        {
-          name: req.body.name,
-          email: req.body.email,
-          password: securePassword,
-          mobile_no: req.body.mobile_no,
-          user_image: image_name,
-          department: req.body.department,
-          gender: req.body.gender,
-          role: role
+      const file = req.files.user_image;
+      cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        if (result) {
+          // Now Create a new User in mongoDB
+          user = await User.create(
+            {
+              name: req.body.name,
+              email: req.body.email,
+              password: securePassword,
+              mobile_no: req.body.mobile_no,
+              user_image: result.url,
+              public_id:result.public_id,
+              department: req.body.department,
+              gender: req.body.gender,
+              role: role
+            }
+          )
+
+          // **** Saving Token for email verification purpose ****
+          let token = await new Token({
+            userId: user._id,
+            token: crypto.randomBytes(32).toString("hex"),
+          }).save();
+          const v_link = `http://localhost:3000/verify/${user.id}/${token.token}`;
+          sendEmail(v_link, req.body.email);
+
+          // Now using user id create a JWT token for security and authenticity
+          const data = { user: user.id };
+          const auth_token = jwt.sign(data, JWT_secret);
+
+          // Now set this flag to true and send with the user data
+          res.json({ success: true, auth_token });
         }
-      )
-
-      // // **** Saving Token for email verification purpose ****
-      let token = await new Token({
-        userId: user._id,
-        token: crypto.randomBytes(32).toString("hex"),
-      }).save();
-
-      // Token.createIndexes( { "expireAt": 1 }, { expireAfterSeconds: 360 } )
-      const v_link = `https://foundit-in.herokuapp.com/verify/${user.id}/${token.token}`;
-      sendEmail(v_link, req.body.email);
-
-
-      // Now using user id create a JWT token for security and authenticity
-      const data = { user: user.id };
-      const auth_token = jwt.sign(data, JWT_secret);
-
-      // Now set this flag to true and send with the user data
-      res.json({ success: true, auth_token });
-
+        else{  
+          console.log("Item can not be uploaded on coudinary!!");
+          res.send({success:false, message:"Some error occured!!"});
+        }
+      });
     } catch (error) {
-      console.log(error.message);
-      // first delete the saved image
-      deleteImage(req.file.path);
-      return res.status(505).json({ success: false, message: error.message, from:"Catch Section | Create User" });
+      return res.status(505).json({ success: false, message: error.message, from: "Catch Section | Create User" });
     }
-  })
+  });
+
 // Router -1.2 For Email verification***********
-router.get('/verify/:id/:token', async (req, res) => {
+router.get("/verify/:id/:token", async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
+    if (user.verified) return res.send({ success: true, message: "Email verified sucessfully" });
     if (!user) return res.status(404).send({ success: false, message: "Your email not found in database" });
-    if(user.verified) return res.send({ success: true, message: "Your email is already verified" });
 
     const token = await Token.findOne({
       userId: user._id,
@@ -139,7 +115,6 @@ router.get('/verify/:id/:token', async (req, res) => {
 
     res.send({ success: true, message: "Email verified sucessfully" });
   } catch (error) {
-    console.log(error.message);
     res.status(404).send({ success: false, message: error.message, from: "Verify Email | Catch Section" });
   }
 });
@@ -151,7 +126,7 @@ router.post('/loginUser', [
   body('email', 'Enter a valid email').isEmail(),
   body('password', 'Password length should be enough').isLength({ min: 5 })
 ], async (req, res) => {
-  
+
   try {
     //check for validaion errors
     const errors = validationResult(req);
@@ -187,7 +162,6 @@ router.post('/loginUser', [
     res.json({ success: true, auth_token });
 
   } catch (error) {
-    console.log(error.message);
     res.status(509).json({ success: false, message: error.message });
   }
 
@@ -211,7 +185,6 @@ router.post('/getUserById/:id', fetchuser, async (req, res) => {
     const uploader = await User.findById(req.params.id).select("-password");//except password
     res.send({ success: true, uploader });
   } catch (error) {
-    console.log(error.message);
     res.status(509).json({ success: false, message: error.message, message2: "Catch Section" });
   }
 })
@@ -224,7 +197,6 @@ router.get('/getAllUsers', fetchuser, Isadmin, async (req, res) => {
     const users = await User.find().select("-password");
     res.send({ success: true, users: users });
   } catch (error) {
-    console.log(error.message);
     res.status(509).json({ success: false, message: error.message, message2: "Can not fetch all users!!!" });
   }
 });
@@ -239,7 +211,6 @@ router.post('/blockAUser/:id', fetchuser, Isadmin, async (req, res) => {
     const updatedStatus = await User.findById(req.params.id).select("isBlocked");
     res.json({ success: true, result: user, newStatus: updatedStatus });
   } catch (error) {
-    console.log(error.message);
     res.status(509).json({ success: false, message: error.message, message2: "Can not Block user!!!" });
   }
 });

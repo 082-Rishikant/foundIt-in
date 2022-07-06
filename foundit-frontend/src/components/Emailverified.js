@@ -35,6 +35,7 @@ function Emailverified() {
           <main className="px-3">
           <h1>404 not found</h1>
           <p className="lead">{message}</p>
+          
         </main>}
       </div>
   )

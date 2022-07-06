@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 function Item(props) {
   const context = useContext(Itemcontext);
   const { deleteItem, userData } = context;
-  const { user_name, image_name, user, name, place, type, _id } = props.item
+  const { user_name, image_name, user, name, place, type, _id , public_id} = props.item
+  const def_img=process.env.REACT_APP_DEFAULT;
 
   return (
     <>
@@ -19,13 +20,13 @@ function Item(props) {
             </span>
 
             {/*<!-- Image -->*/}
-            <img src={`/item-img/${image_name}`}
+            <img src={image_name}
               className="card-img-top rounded mw-100" alt="course"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = `/item-img/default.png`;
+                currentTarget.src = {def_img};
               }} style={{"minWidth":250, "height":250}} />
-
+              
             {/*<!-- Card body -->*/}
             <div className="card-body pe-2 py-1 m-0">
               {/*<!-- Title -->*/}
@@ -50,7 +51,7 @@ function Item(props) {
                 <button type="button" onClick={() => {
                   let flag = window.confirm("Do you realy want to delete this Item?");
                   if (flag) {
-                    let a = deleteItem(_id);
+                    let a = deleteItem(_id, public_id);
                     a.then((d) => {
                       if (d) {
                         props.showAlert("Item deleted successfully", 'success');

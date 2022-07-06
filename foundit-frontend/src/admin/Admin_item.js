@@ -4,7 +4,9 @@ import Itemcontext from '../context APIs/items/Itemcontext';
 function Admin_item(props) {
   const context = useContext(Itemcontext);
   const { deleteItem } = context;
-  const { _id, name, type, place, date, isreported, status, image_name , user_name} = props.item;
+  const { _id, name, type, place, date, isreported, status, image_name , user_name, public_id} = props.item;
+
+  const def_img=process.env.REACT_APP_DEFAULT;
 
   return (
     <>
@@ -18,11 +20,11 @@ function Admin_item(props) {
         <td>{isreported ? "Yes" : "No"}</td>
         <td>{status}</td>
         <td>
-          {<img src={`/item-img/${image_name}`}
+          {<img src={image_name}
             className="card-img-top rounded" alt="course"
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = `/item-img/default.png`;
+              currentTarget.src = {def_img};
             }} style={{ "width": 50, "height": 50 }} />}
         </td>
         <td>
@@ -30,7 +32,7 @@ function Admin_item(props) {
             <button type="button" onClick={() => {
               let flag = window.confirm("Do you realy want to delete this Item?");
               if (flag) {
-                let a = deleteItem(_id);
+                let a = deleteItem(_id, public_id);
                 a.then((d) => {
                   if (d) {
                     props.showAlert("Item deleted successfully", 'success');

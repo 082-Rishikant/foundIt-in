@@ -136,7 +136,7 @@ export default function Homepage(props) {
       </div>
 
       {/* 4.  Add Item Button */}
-      <AddItem showAlert={props.showAlert} />
+      <AddItem showAlert={props.showAlert}/>
 
     </>
   )

@@ -22,7 +22,12 @@ const Userschema = new Schema({
     unique:true
   },
   user_image:{
-    type:String
+    type:String,
+    required:true
+  },
+  public_id:{
+    type:String,
+    required:true
   },
   department:{
     type:String,

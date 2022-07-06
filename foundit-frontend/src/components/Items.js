@@ -14,7 +14,7 @@ function Items(props) {
   const { editItem } = context;
 
   const [image, setImage] = useState();
-  const [newItem, setnewItem] = useState({ id: "", ename: "", edescription: "", etype: "", eplace: "", edate: "" });
+  const [newItem, setnewItem] = useState({ id: "", ename: "", edescription: "", etype: "", eplace: "", edate: "", public_id: "" });
   const [imglmtexc, setImglmtexc] = useState(false);
   const refShow = useRef(null);
   const refHide = useRef(null);
@@ -25,7 +25,7 @@ function Items(props) {
   const minl = { minLength: 2 };
 
   const updateItem = (item) => {
-    setnewItem({ id: item._id, ename: item.name, edescription: item.description, etype: item.type, eplace: item.place, edate: item.date });
+    setnewItem({ id: item._id, ename: item.name, edescription: item.description, etype: item.type, eplace: item.place, edate: item.date, public_id: item.public_id });
     setEstatus(item.status);
     refShow.current.click();
   }
@@ -34,7 +34,7 @@ function Items(props) {
     setnewItem({ ...newItem, [e.target.name]: e.target.value });
   }
 
-  const { id, ename, etype, eplace, edate, edescription } = newItem;
+  const { id, ename, etype, eplace, edate, edescription, public_id } = newItem;
 
   const handleUpdateItem = (e) => {
     e.preventDefault(); // default settings of form
@@ -58,7 +58,7 @@ function Items(props) {
     if (image && image.size > 2 * 1024 * 1024) { setImglmtexc(true); return; }
     setImglmtexc(false);
 
-    let a = editItem(data, id);
+    let a = editItem(data, id, public_id);
     a.then((d) => {
       if (d) {
         props.showAlert("Item Updated successfully", "success");
@@ -66,8 +66,6 @@ function Items(props) {
       }
     })
   }
-
-
 
   return (
     <>
@@ -80,16 +78,16 @@ function Items(props) {
       // <!-- Modal --> */}
       <div className="modal" id="exampleModal3" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg " >
-          <div className="modal-content" style={{borderRadius: "15px"}}>
+          <div className="modal-content" style={{ borderRadius: "15px" }}>
 
             {/* modal header */}
-            <div className="modal-header bg-dark" style={{borderRadius: "15px 15px 0px 0px"}}>
+            <div className="modal-header bg-dark" style={{ borderRadius: "15px 15px 0px 0px" }}>
               <h5 className="modal-title text-white" id="exampleModalLabel">Update item</h5>
               <button type="button" className="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             {/* modal Body */}
-            <div className="modal-body mx-auto shadow bg-light px-5 py-3 col-12 justify-items-center" style={{borderRadius: "15px"}}>
+            <div className="modal-body mx-auto shadow bg-light px-5 py-3 col-12 justify-items-center" style={{ borderRadius: "15px" }}>
               {/* Form  */}
               <form onSubmit={handleUpdateItem} method="PUT">
 
@@ -132,7 +130,7 @@ function Items(props) {
                     InputLabelProps={fontS} value={newItem.edate.slice(0, 10)} />
                 </div>
                 <div className="my-3">
-                  {imglmtexc && <label htmlFor="image" className="form-label text-danger ms-2"> Image size exceeded!!</label>}
+                  {/* {imglmtexc && <label htmlFor="image" className="form-label text-danger ms-2"> Image size exceeded!!</label>} */}
                   <TextField type="file" required focused fullWidth id="image" label="Image of Item" variant="standard" onChange={(e) => {
                     const file = e.target.files[0];
                     if (file && file.size > 2 * 1024 * 1024) setImglmtexc(true);
@@ -140,7 +138,10 @@ function Items(props) {
                     setImage(file);
                   }} name="image" InputProps={fontS}
                     InputLabelProps={fontS} />
-                  <div className="form-text">Only images are expected</div>
+                  <div className='d-flex flex-row justify-content-between'>
+                    <div className="form-text p-0 m-0">Only images are expected, max image size is 2MB</div>
+                    {imglmtexc && <label htmlFor="user_image" className="p-0 m-0 text-danger form-text"> Image size exceeded!!</label>}
+                  </div>
                 </div>
 
                 <div className='mt-5'>

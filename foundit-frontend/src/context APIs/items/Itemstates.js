@@ -51,8 +51,8 @@ function Itemstates(props) {
   }
 
   // 3. ******** Delete A Item ********
-  const deleteItem = async (id) => {
-    const response = await fetch(`/api/item/deleteItem/${id}`, {
+  const deleteItem = async (id, public_id) => {
+    const response = await fetch(`/api/item/deleteItem/${id}/${public_id}`, {
       method: 'DELETE',
       headers: {
         'auth_token': localStorage.getItem('auth_token'),
@@ -66,14 +66,16 @@ function Itemstates(props) {
     } else {
       const newItems = items.filter((e) => { return e._id !== id });
       setItems(newItems);
+      const newAllItems = allitems.filter((e) => { return e._id !== id });
+      setAllitems(newAllItems);
     }
 
     return json.success;
   }
 
   // 4. ******** Edit a Item ********
-  const editItem = async (data, id) => {
-    const response = await fetch(`/api/item/updateItem/${id}`, {
+  const editItem = async (data, id, public_id) => {
+    const response = await fetch(`/api/item/updateItem/${id}/${public_id}`, {
       method: 'PUT',
       headers: {
         'auth_token': localStorage.getItem('auth_token')

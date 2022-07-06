@@ -10,6 +10,8 @@ function ViewItem() {
   const [iflag, setIflag] = useState(false);
   const [uflag, setUflag] = useState(false);
 
+  const def_img=process.env.REACT_APP_DEFAULT;
+
   useEffect(() => {
     itemId && getAItem(itemId).then((d)=>{
       if(d.success){ setIflag(true);  }
@@ -37,11 +39,11 @@ function ViewItem() {
           </ul>
 
           <div className="col-md-5 order-md-1">
-            <img src={`/user-img/${uploader.user_image}`}
+            <img src={uploader.user_image}
               alt="course"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = `/user-img/default.png`;
+                currentTarget.src = {def_img};
               }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />
           </div>
 
@@ -64,11 +66,11 @@ function ViewItem() {
           </ul>
 
           <div className="col-md-5">
-            <img src={`/item-img/${item.image_name}`}
+            <img src={item.image_name}
               alt="course"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = `/item-img/default.png`;
+                currentTarget.src = {def_img};
               }} className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" style={{ "width": 400, "height": 400 }} preserveAspectRatio="xMidYMid slice" focusable="false" />
           </div>
         </div>}

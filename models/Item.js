@@ -32,6 +32,10 @@ const itemSchema=new Schema({
     type:String,
     required:true
   },
+  public_id:{
+    type:String,
+    required:true
+  },
   is_reported:{
     type:Boolean,
     default:false

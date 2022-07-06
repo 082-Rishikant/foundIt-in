@@ -7,6 +7,8 @@ function Admin_User(props) {
   const { _id, name, email, mobile_no, user_image, department, isBlocked, gender, role } = props.user;
   const [status, setStatus] = useState(isBlocked);
 
+  const def_img=process.env.REACT_APP_DEFAULT;
+
   return (
     <>
 
@@ -20,11 +22,11 @@ function Admin_User(props) {
         <td>{isBlocked?"Blocked":"Active"}</td>
         <td>{role}</td>
         <td>
-          <img src={`/user-img/${user_image}`}
+          <img src={user_image}
             className="card-img-top rounded" alt="course"
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = `/user-img/default.png`;
+              currentTarget.src = {def_img};
             }} style={{ "width": 50, "height": 50 }} />
         </td>
         <td>
