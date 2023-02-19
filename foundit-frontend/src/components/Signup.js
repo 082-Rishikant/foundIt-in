@@ -116,7 +116,7 @@ function Signup(props) {
 
           <div className="mt-3 input-group-lg p-0">
             {/* {imglmtexc && <label htmlFor="user_image" className="form-label text-danger"> Image size exceeded!!</label>} */}
-            <TextField required focused label="Your image" type="file" fullWidth id="email" variant="standard" name="email" InputProps={fontS}
+            <TextField required focused label="Your image" type="file" fullWidth id="image" variant="standard" name="image" InputProps={fontS}
               InputLabelProps={fontS} onChange={event => {
                 const image = event.target.files[0];
                 if (image && image.size > 2 * 1024 * 1024) setImglmtexc(true);

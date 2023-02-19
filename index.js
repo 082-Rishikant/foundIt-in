@@ -8,11 +8,11 @@ require('dotenv').config();
 const app = express();
 
 // Step-2 Heroku*******
-const port=process.env.PORT || 5000;
+const port=process.env.PORT;
 
 connectToMongo();
 
-// cloudinary****
+// file upload****
 app.use(fileupload({useTempFiles:true}));
 
 app.use(express.json());

@@ -2,8 +2,7 @@ const mongoose=require('mongoose');
 
 require('dotenv').config();
 
-// const mongoURI = `mongodb+srv://082_Rishikant:Hansraj1999@cluster0.c8wdi.mongodb.net/test`;
-const mongoURI = process.env.mongoURI;
+const mongoURI = process.env.mongoURI || process.env.URI;
 
 const connectToMongo=()=>{
   mongoose.connect(mongoURI, {
@@ -12,7 +11,8 @@ const connectToMongo=()=>{
 ).then((link) => {
   console.log("Connected to mongo successfully")
 })
-.catch(() => {
+.catch((e) => {
+  console.log(e);
   console.log("Database not connected.");
 })
 }
