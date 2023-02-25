@@ -4,10 +4,10 @@
   "description": "foundIt-Do you got any other's lost thing upload here Or if you lost something search here",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "both": "concurrently \"npx nodemon index.js\" \"cd foundit-frontend && npm run start\" ",
-    "start": "node index.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix foundit-frontend && npm run build --prefix foundit-frontend"
+    "dev": "concurrently \"npm start\" \"cd foundit-frontend && npm run start\" "
   },
   "author": "Rishikant Patel",
   "license": "ISC",
