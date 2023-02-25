@@ -2,6 +2,7 @@ const express = require('express');
 const connectToMongo=require('./db');
 const cors=require('cors');
 const fileupload=require('express-fileupload');
+const path = require("path");
 // Port Number using environmental variables
 require('dotenv').config();
 
@@ -25,8 +26,8 @@ app.use("/user-img", express.static(__dirname+'/public/user_images'));
 
 // step 3: Heroku 
 if ( process.env.NODE_ENV === "production"){
-  app.use(express.static("foundit-frontend/build"));
-  const path = require("path");
+  // app.use(express.static("foundit-frontend/build"));
+  app.use(express.static(path.join(__dirname, "./foundit-frontend/build")));
   app.get("*", (req, res) => {
       res.sendFile(path.resolve(__dirname, 'foundit-frontend', 'build', 'index.html'));
   })
