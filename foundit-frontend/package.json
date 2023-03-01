@@ -25,7 +25,6 @@
     "eject": "react-scripts eject",
     "both": "concurrently \"npm run start\" \"npx nodemon ../index.js\""
   },
-  
   "eslintConfig": {
     "extends": [
       "react-app",
