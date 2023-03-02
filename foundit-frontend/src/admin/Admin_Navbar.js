@@ -16,7 +16,7 @@ function AdminNavbar(props) {
   
 
   const handleLogout = () => {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('foundit_auth_token');
     clearItems();
     props.showAlert("Logged Out successfully", 'success');
     navigate("/login");
@@ -44,7 +44,7 @@ function AdminNavbar(props) {
               </li>
             </ul>
 
-            {!localStorage.getItem('auth_token')
+            {!localStorage.getItem('foundit_auth_token')
               ? <div className="d-flex">
                 <Link className="btn btn-outline-primary" to="login">Login</Link>
               </div>

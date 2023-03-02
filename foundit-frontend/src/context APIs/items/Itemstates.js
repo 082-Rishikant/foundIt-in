@@ -20,7 +20,7 @@ function Itemstates(props) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'auth_token': localStorage.getItem('auth_token')
+        'foundit_auth_token': localStorage.getItem('foundit_auth_token')
       }
     });
     const json = await response.json();
@@ -34,7 +34,7 @@ function Itemstates(props) {
     const response = await fetch(`/api/item/uploaditem`, {
       method: 'POST',
       headers: {
-        'auth_token': localStorage.getItem('auth_token')
+        'foundit_auth_token': localStorage.getItem('foundit_auth_token')
       },
       body: data
     });
@@ -55,7 +55,7 @@ function Itemstates(props) {
     const response = await fetch(`/api/item/deleteItem/${id}/${public_id}`, {
       method: 'DELETE',
       headers: {
-        'auth_token': localStorage.getItem('auth_token'),
+        'foundit_auth_token': localStorage.getItem('foundit_auth_token'),
         'Content-Type': 'application/json'
       }
     });
@@ -78,7 +78,7 @@ function Itemstates(props) {
     const response = await fetch(`/api/item/updateItem/${id}/${public_id}`, {
       method: 'PUT',
       headers: {
-        'auth_token': localStorage.getItem('auth_token')
+        'foundit_auth_token': localStorage.getItem('foundit_auth_token')
       },
       body: data
     });
@@ -121,7 +121,7 @@ function Itemstates(props) {
     const response = await fetch(`/api/item/getAItem/${id}`, {
       method: 'GET',
       headers: {
-        'auth_token': localStorage.getItem('auth_token')
+        'foundit_auth_token': localStorage.getItem('foundit_auth_token')
       }
     });
     const json = await response.json();
@@ -134,7 +134,7 @@ function Itemstates(props) {
     const response=await fetch(`/api/item/getAllItems`, {
       method:'GET',
       headers:{
-        'auth_token':localStorage.getItem('auth_token')
+        'foundit_auth_token':localStorage.getItem('foundit_auth_token')
       }
     });
     const json=await response.json();
@@ -149,7 +149,7 @@ function Itemstates(props) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'auth_token': localStorage.getItem('auth_token')
+        'foundit_auth_token': localStorage.getItem('foundit_auth_token')
       }
     });
     const json = await response.json();
@@ -163,7 +163,7 @@ function Itemstates(props) {
       method:'POST',
       headers:{
         'Content-Type':'application/json',
-        'auth_token':localStorage.getItem('auth_token')
+        'foundit_auth_token':localStorage.getItem('foundit_auth_token')
       }
     });
     const json=await response.json();
@@ -177,7 +177,7 @@ function Itemstates(props) {
       method:'GET',
       headers:{
         'Content-Type':'application/json',
-        'auth_token':localStorage.getItem('auth_token')
+        'foundit_auth_token':localStorage.getItem('foundit_auth_token')
       }
     });
     const json=await response.json();
@@ -191,7 +191,7 @@ function Itemstates(props) {
       method:'POST',
       headers:{
         'Content-Type':'application/json',
-        'auth_token':localStorage.getItem('auth_token')
+        'foundit_auth_token':localStorage.getItem('foundit_auth_token')
       }
     });
     const json=await response.json();

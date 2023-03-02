@@ -27,7 +27,7 @@ function Login(props) {
       body: JSON.stringify({ email: cred.email, password: cred.password })
     }).then(res=>res.json()).then((res)=>{
       if (res.success) {
-        localStorage.setItem('auth_token', res.auth_token);
+        localStorage.setItem('foundit_auth_token', res.foundit_auth_token);
         getUser();
         navigate("/");
         props.showAlert("Loggedin successfully", "success");

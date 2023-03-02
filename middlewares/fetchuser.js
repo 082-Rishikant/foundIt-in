@@ -4,13 +4,13 @@ require('dotenv').config();
 const JWT_secret=process.env.JWT_SECRET_KEY;
 
 const fetchuser=async (req, res, next)=>{
-  const auth_token=req.header('auth_token');
-  if(!auth_token){
+  const foundit_auth_token=req.header('foundit_auth_token');
+  if(!foundit_auth_token){
     res.status(401).json({from:"fethcUser", message:"You are not loggedin!!!!"});
     return;
   }
   try {
-    const user_data=jwt.verify(auth_token, JWT_secret);
+    const user_data=jwt.verify(foundit_auth_token, JWT_secret);
     req.user_id=user_data.user; // this is user id we have at the time of generating web token
 
     const user=await User.findById(req.user_id);

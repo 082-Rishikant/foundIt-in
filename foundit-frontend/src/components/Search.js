@@ -26,7 +26,7 @@ function Search(props) {
   const { name, type, place, date } = s_tags;
 
   useEffect(() => {
-    localStorage.getItem('auth_token') && getAllItems().then((d) => {
+    localStorage.getItem('foundit_auth_token') && getAllItems().then((d) => {
       if (d.success) setS_items(d.allitems);
       else props.showAlert(d.message, "danger");
     });
@@ -36,7 +36,7 @@ function Search(props) {
 
   const handleSearch = async (e) => {
     e.preventDefault(); // default settings of form
-    if (localStorage.getItem('auth_token')) {
+    if (localStorage.getItem('foundit_auth_token')) {
       let op = allitems;
       if (name) op = op.filter(item => item.name === name);
       if (type) op = op.filter(item => item.type === type);

@@ -12,13 +12,13 @@ export default function Navbar(props) {
   if (userData) verified = userData.verified;
 
   useEffect(() => {
-    if (localStorage.getItem('auth_token')) getUser();
+    if (localStorage.getItem('foundit_auth_token')) getUser();
     // eslint-disable-next-line
   }, [])
 
 
   const handleLogout = () => {
-    localStorage.removeItem('auth_token');
+    localStorage.removeItem('foundit_auth_token');
     clearItems();
     props.showAlert("Logged Out successfully", 'success');
     navigate("/login");
@@ -44,12 +44,12 @@ export default function Navbar(props) {
               <li className="nav-item d-flex flex-row">
                 <Link className="nav-link  text-muted p" to="search"><i className="bi bi-search me-1"></i>Search</Link>
               </li>
-              {localStorage.getItem('auth_token') && role === "admin" && verified && <li className="nav-item d-flex flex-row">
+              {localStorage.getItem('foundit_auth_token') && role === "admin" && verified && <li className="nav-item d-flex flex-row">
                 <Link className="nav-link  text-muted p" to="admin/allItems">Admin</Link>
               </li>}
             </ul>
 
-            {(localStorage.getItem('auth_token') && verified)
+            {(localStorage.getItem('foundit_auth_token') && verified)
               ? <div className='d-flex'>
                 <p className='text-muted m-2'>Welcome {userData.name}</p>
                 <button className='btn btn-primary mx-1' onClick={handleLogout}>Logout</button>

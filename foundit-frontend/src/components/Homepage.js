@@ -11,7 +11,7 @@ export default function Homepage(props) {
   const [foundi, setFoundi] = useState(0);
 
   useEffect(() => {
-    if (localStorage.getItem('auth_token')) {
+    if (localStorage.getItem('foundit_auth_token')) {
       getUser();
       fetchAllItems().then((d) => { 
         if (!(d.success)) props.showAlert(d.message, "danger");  
@@ -57,7 +57,7 @@ export default function Homepage(props) {
               <span className="display-6 lh-1 text-primary mb-0"><i className="bi bi-patch-check-fill"></i></span>
                 <div className="ms-4 h6 fw-normal mb-0">
                   <div className="d-flex">
-                    <h5 className="purecounter mb-0 fw-bold me-2" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{(localStorage.getItem('auth_token'))?items.length:0}</h5>
+                    <h5 className="purecounter mb-0 fw-bold me-2" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{(localStorage.getItem('foundit_auth_token'))?items.length:0}</h5>
                     <span className="mb-0 h5">Items</span>
                   </div>
                   <p className="mb-0">you have uploaded total items</p>

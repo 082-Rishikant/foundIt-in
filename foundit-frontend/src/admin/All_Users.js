@@ -24,7 +24,7 @@ export default function AdminHomepage(props) {
   const fontS = { style: { fontSize: fontsize } };
 
   useEffect(() => {
-    if (!localStorage.getItem('auth_token')) {
+    if (!localStorage.getItem('foundit_auth_token')) {
       navigate("/");  props.showAlert("!! You have not loggedin", "danger");  return;
     }
     getUser().then((d)=>{
@@ -49,7 +49,7 @@ export default function AdminHomepage(props) {
 
   const handleSearch = async (e) => {
     e.preventDefault(); // default settings of form
-    if (localStorage.getItem('auth_token')) {
+    if (localStorage.getItem('foundit_auth_token')) {
       let op = allusers;
       if (name) op = op.filter(item => item.name === name);
       if(blocked!=="All")  op = op.filter(item => item.isBlocked === blocked);
@@ -72,7 +72,7 @@ export default function AdminHomepage(props) {
                 <span className="display-6 lh-1 text-primary mb-0"><i className="bi bi-patch-check-fill"></i></span>
                 <div className="ms-4 h6 fw-normal mb-0">
                   <div className="d-flex">
-                    <h5 className="purecounter mb-0 fw-bold me-2" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{(localStorage.getItem('auth_token'))?allusers.length:0}</h5>
+                    <h5 className="purecounter mb-0 fw-bold me-2" data-purecounter-start="0" data-purecounter-end="10" data-purecounter-delay="200" data-purecounter-duration="0">{(localStorage.getItem('foundit_auth_token'))?allusers.length:0}</h5>
                     <span className="mb-0 h5">Users</span>
                   </div>
                   <p className="mb-0">Total Users</p>

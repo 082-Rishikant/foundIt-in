@@ -85,10 +85,10 @@ router.post('/createuser',
 
           // Now using user id create a JWT token for security and authenticity
           const data = { user: user.id };
-          const auth_token = jwt.sign(data, JWT_secret);
+          const foundit_auth_token = jwt.sign(data, JWT_secret);
 
           // Now set this flag to true and send with the user data
-          res.json({ success: true, auth_token });
+          res.json({ success: true, foundit_auth_token });
         }
         else{  
           console.log("Item can not be uploaded on coudinary!!");
@@ -159,10 +159,10 @@ router.post('/loginUser', [
     // returning user id in Token
     const data = { user: user.id };  // this id will be retreived at the time of authentication
     // and at the time of fething the user deails
-    const auth_token = jwt.sign(data, JWT_secret);
+    const foundit_auth_token = jwt.sign(data, JWT_secret);
 
     // if password a also is same then send the flag=true with user data
-    res.json({ success: true, auth_token });
+    res.json({ success: true, foundit_auth_token });
 
   } catch (error) {
     res.status(509).json({ success: false, message: error.message });

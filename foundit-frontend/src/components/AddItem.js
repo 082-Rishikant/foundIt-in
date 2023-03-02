@@ -61,7 +61,7 @@ function AddItem(props) {
     <>
       {/* <!-- Button trigger modal --> */}
       {
-        localStorage.getItem('auth_token') ?
+        localStorage.getItem('foundit_auth_token') ?
           <button type="button" className="btn btn-primary btn-lg rounded-pill m-0 p-0 p-1" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ position: "fixed", bottom: "20px", right: "20px" }}>
             <i className="bi bi-plus-lg me-1"></i>Add Item
           </button> :

@@ -56,7 +56,7 @@ function Signup(props) {
     });
     const json = await response.json();
     if (json.success) {
-      localStorage.removeItem('auth_token');
+      localStorage.removeItem('foundit_auth_token');
       props.showAlert("An Email is sent on your email id please verify that.", "success");
     }
     else {
