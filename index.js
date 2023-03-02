@@ -13,8 +13,8 @@ const port=process.env.PORT;
 
 connectToMongo();
 
-// file upload****
-app.use(fileupload({useTempFiles:true}));
+// for uploading file
+app.use(fileupload());
 
 app.use(express.json());
 app.use(cors());
