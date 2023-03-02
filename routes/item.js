@@ -33,7 +33,7 @@ router.post('/uploaditem',
       }
 
       const file = req.files.image;
-      cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+      cloudinary.uploader.upload('/tmp', (err, result) => {
         if (result) {
           // create an new item using Item model
           let date = new Date();
