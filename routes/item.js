@@ -55,7 +55,7 @@ router.post('/uploaditem',
           // Now save the item to mongodb
           item.save().then(savedItem => { res.send({ success: true, savedItem }); });
         } else {
-          return res.status(503).send({ success: false, from: "Cannot upload image", message: error.message });
+          return res.status(503).send({ success: false, message:err});
         }
       });
     } catch (error) {
